@@ -57,21 +57,21 @@ public class CommandListener implements Listener
     //Basically a copy of
     //https://github.com/ryanhamshire/GriefPrevention/blob/7067db624de85e153488cbe41afbcc1c8e948754/src/me/ryanhamshire/GriefPrevention/PlayerEventHandler.java#L532
     //As he does not have this as a separate method to API into (would be nice if there was).
-    public boolean isIgnored(Player sender, Player target)
+    public int isIgnored(Player sender, Player target)
     {
         PlayerData playerData = ds.getPlayerData(target.getPlayer().getUniqueId());
         if (playerData.ignoredPlayers.containsKey(sender.getUniqueId()))
-            return true;
+            return 1;
         playerData = ds.getPlayerData(sender.getPlayer().getUniqueId());
         if (playerData.ignoredPlayers.containsKey(target.getUniqueId()))
         {
             //Send info message if player is ignoring their recipient
             sender.sendMessage(ChatColor.RED + "You need to " + ChatColor.GOLD + "/unignore " + target.getName() +
                     ChatColor.RED + " to be teleported to them.");
-            return true;
+            return 2;
         }
         else
-            return false;
+            return 0;
     }
 
     //Checks if a player qualifies to receive a soft message.
@@ -108,10 +108,15 @@ public class CommandListener implements Listener
         else
             return false;
 
+        int ayy = isIgnored(sender, target);
         //First check if either player is ignoring the other
-        if (isIgnored(sender, target))
+        if (ayy == 1)
         {
             sendSoftMessage(sender);
+            return true;
+        }
+        else if (ayy == 2)
+        {
             return true;
         }
         else
