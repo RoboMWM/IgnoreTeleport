@@ -1,0 +1,6 @@
+name: IgnoreTeleport
+version: ${project.version}
+#website: 
+author: RoboMWM
+main: me.robomwm.IgnoreTeleport.Main
+depend: [GriefPrevention]
