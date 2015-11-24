@@ -68,7 +68,7 @@ public class CommandListener implements Listener
             //Send info message if player is ignoring their recipient
             sender.sendMessage(ChatColor.RED + "You need to " + ChatColor.GOLD + "/unignore " + target.getName() +
                     ChatColor.RED + " to be teleported to them.");
-            return false;
+            return true;
         }
         else
             return false;
