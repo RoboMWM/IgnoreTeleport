@@ -65,9 +65,6 @@ public class CommandListener implements Listener
         playerData = ds.getPlayerData(sender.getPlayer().getUniqueId());
         if (playerData.ignoredPlayers.containsKey(target.getUniqueId()))
         {
-            //Send info message if player is ignoring their recipient
-            sender.sendMessage(ChatColor.RED + "You need to " + ChatColor.GOLD + "/unignore " + target.getName() +
-                    ChatColor.RED + " to be teleported to them.");
             return 2;
         }
         else
@@ -117,6 +114,8 @@ public class CommandListener implements Listener
         }
         else if (ayy == 2) //Should mean sender is ignoring target
         {
+            //Send info message if player is ignoring their recipient
+            sender.sendMessage(ChatColor.RED + "You need to " + ChatColor.GOLD + "/unignore " + target.getName() + ChatColor.RED + " to be teleported to them.");
             return true;
         }
         else
