@@ -19,7 +19,7 @@ public class CommandListener implements Listener
 {
     GriefPrevention gp = (GriefPrevention)getServer().getPluginManager().getPlugin("GriefPrevention");
     DataStore ds = gp.dataStore;
-    @EventHandler(ignoreCancelled = true, priority = EventPriority.LOW)
+    @EventHandler(ignoreCancelled = true, priority = EventPriority.HIGHEST)
     public void onPlayerCommandPreprocess(PlayerCommandPreprocessEvent event)
     {
         String message = event.getMessage();
@@ -28,15 +28,15 @@ public class CommandListener implements Listener
         if (args.length < 2)
             return;
         String command = args[0].toLowerCase();
-        //Check the command
+        //Check if command is a teleport command
         if (command.equals("/tpa") || command.equals("/tp") || command.equals("/visit"))
         {
             Player sender = event.getPlayer();
             //First see if sender is ignored/is ignoring target
             if (tryIgnore(sender, args))
             {
-                event.setCancelled(true); //Successful? Good, cancel and we're done
-                return;
+                event.setCancelled(true); //Successful? Good, cancel.
+                return; //and we're done
             }
 
             //Otherwise check if sender is softmuted in GriefPrevention
@@ -110,12 +110,12 @@ public class CommandListener implements Listener
 
         int ayy = isIgnored(sender, target);
         //First check if either player is ignoring the other
-        if (ayy == 1)
+        if (ayy == 1) //Should mean sender is ignored
         {
             sendSoftMessage(sender);
             return true;
         }
-        else if (ayy == 2)
+        else if (ayy == 2) //Should mean sender is ignoring target
         {
             return true;
         }
