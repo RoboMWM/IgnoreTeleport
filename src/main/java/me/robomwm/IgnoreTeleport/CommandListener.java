@@ -105,14 +105,14 @@ public class CommandListener implements Listener
         else
             return false;
 
-        int ayy = isIgnored(sender, target);
+        int ignored = isIgnored(sender, target);
         //First check if either player is ignoring the other
-        if (ayy == 1) //Should mean sender is ignored
+        if (ignored == 1) //Should mean sender is ignored
         {
             sendSoftMessage(sender);
             return true;
         }
-        else if (ayy == 2) //Should mean sender is ignoring target
+        else if (ignored == 2) //Should mean sender is ignoring target
         {
             //Send info message if player is ignoring their recipient
             sender.sendMessage(ChatColor.RED + "You need to " + ChatColor.GOLD + "/unignore " + target.getName() + ChatColor.RED + " to be teleported to them.");
