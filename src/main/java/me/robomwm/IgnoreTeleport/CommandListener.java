@@ -52,7 +52,7 @@ public class CommandListener implements Listener
 
     public void sendSoftMessage(Player sender)
     {
-        sender.sendMessage(ChatColor.RED + "Hmm, the transporter is having issues teleporting you. Maybe try someone else?");
+        sender.sendMessage(ChatColor.RED + "Hmm, the transporter is having issues teleporting you there. Maybe try someone else?");
     }
     //Basically a copy of
     //https://github.com/ryanhamshire/GriefPrevention/blob/7067db624de85e153488cbe41afbcc1c8e948754/src/me/ryanhamshire/GriefPrevention/PlayerEventHandler.java#L532
@@ -115,6 +115,7 @@ public class CommandListener implements Listener
         else if (ignored == 2) //Should mean sender is ignoring target
         {
             //Send info message if player is ignoring their recipient
+            //TODO: make this behavior configurable
             sender.sendMessage(ChatColor.RED + "You need to " + ChatColor.GOLD + "/unignore " + target.getName() + ChatColor.RED + " to be teleported to them.");
             return true;
         }
