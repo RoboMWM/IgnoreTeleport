@@ -4,3 +4,4 @@ version: ${project.version}
 author: RoboMWM
 main: me.robomwm.IgnoreTeleport.Main
 depend: [GriefPrevention]
+softdepend: [CompleteSoftmuteVanilla, CompleteSoftmute]
